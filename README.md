@@ -8,6 +8,8 @@ At its core, Open Genmoji is simply a small LoRA file that tells a Image Generat
 
 There's built in scripts here to help you generate optimal prompts for your image models to create the best emoji, and also scripts to help you finetune your very own Open Genmoji model.
 
+See info about finetuning Open Genmoji yourself in the `finetuning` folder.
+
 ## Running Open Genmoji on Mac
 
 > **Note**: This guide is optimized for running Flux with LoRA on Mac. If you are using other systems, feel free to search for a guide online for using LoRA with Flux (there are many!)... **I still recommend reading through this, since it also includes info on the Open Genmoji Prompt Assist, which may be helpful**
