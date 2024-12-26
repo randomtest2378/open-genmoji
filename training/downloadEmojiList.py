@@ -35,7 +35,7 @@ def download_emojis():
     emoji_dir, raw_dir = setup_folders()
     start_num = get_next_number(emoji_dir)
 
-    with open("emoji_data_pruned.json", "r") as f:
+    with open("emojisPruned.json", "r") as f:
         emoji_data = json.load(f)
 
     total = len(emoji_data)
