@@ -33,6 +33,8 @@ def main(user_prompt: str, output_path: str = "output/genmoji.png"):
     newImg = image.resize((width * 5, height * 5), Image.LANCZOS)
 
     output_path = get_unique_path(output_path)
+    # Create output directory if it doesn't exist
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     newImg.save(output_path)
 
 
