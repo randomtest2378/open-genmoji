@@ -1,10 +1,10 @@
 # Finetuning Open Genmoji
 
-Here's how you can finetune Open Genmoji yourself, either with a different set of emojis, fientune Open Genmoji with more steps, use a different model, or just for fun!
+Here's how you can finetune Open Genmoji yourself, either with a different set of emojis, finetune Open Genmoji with more steps, use a different model, or just for fun!
 
 See the README in the `lora` folder for more information about what models have already been finetuned.
 
-**This guide offers a way to finetune with SimpleTuner. You may use other methods if you want.**
+**This guide offers a way to finetune with SimpleTuner. Feel free to finetune with other methods and contribute to this repo!**
 
 ## Setting Up an Environment
 

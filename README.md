@@ -21,6 +21,7 @@ If you're experienced with Image Models, go to [Quickstart](#quickstart). Otherw
   - [Running Open Genmoji with Prompt Assist](#running-open-genmoji-with-prompt-assist)
   - [LM Studio Prompt Assist and `mflux` Workflow](#lm-studio-prompt-assist-and-mflux-workflow)
 - [Postprocessing](#postprocessing)
+- [Contributing](#contributing)
 
 ## Quickstart
 
@@ -167,3 +168,13 @@ Now, if you're on iOS 17+, you should be able to apply this sticker by dragging 
 If you're on iOS 18+, in your emoji menu, you can simply tap your sticker to use it inline just like an emoji.
 
 If you want to delete the Sticker, long press and hold (**don't move your finger**) on the Sticker in the Sticker gallery and release after ~2s. Press **Delete**.
+
+## Contributing
+
+Open Genmoji is open to more LoRAs for:
+
+- New models
+- New/Different sets of emojis
+- More training for existing emoji sets
+
+Check out `finetuning/README.md` for more information about finetuning, and check out `lora/README.md` for the current available LoRAs.
