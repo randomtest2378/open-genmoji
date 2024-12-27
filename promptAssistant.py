@@ -11,8 +11,10 @@ def get_prompt_response(user_prompt: str) -> str:
     headers = {"Content-Type": "application/json"}
 
     # The JSON data payload
-    # Read the content from PROMPT.md
-    with open(f"{os.path.abspath(os.path.dirname(__file__))}/PROMPT.md", "r") as file:
+    # Read the content from METAPROMPT.md
+    with open(
+        f"{os.path.abspath(os.path.dirname(__file__))}/METAPROMPT.md", "r"
+    ) as file:
         prompt_content = file.read()
 
     # Append the user prompt
