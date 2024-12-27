@@ -8,9 +8,11 @@ At its core, Open Genmoji is simply a LoRA file, finetuned based on thousands of
 
 Open Genmoji also comes with a built special metaprompt, known as [Open Genmoji Prompt Assist](#prompt-assist) to help you create the perfect prompt to make any emoji you want.
 
-The best part? You can also [use your creation in iOS 18+ as a real emoji—Even](#postprocessing) if your phone doesn't support Apple Intelligence.
+The best part? You can also [use your creation in iOS 18+ as a real emoji](#postprocessing)—Even if your phone doesn't support Apple Intelligence.
 
 If you're experienced with Image Models, go to [Quickstart](#quickstart). Otherwise, check out the [Tutorial](#tutorial) for a full explanation.
+
+Be sure to read the [Important Things to Know](#important-things-to-know)!
 
 ## Table of Contents
 
@@ -22,6 +24,15 @@ If you're experienced with Image Models, go to [Quickstart](#quickstart). Otherw
   - [LM Studio Prompt Assist and `mflux` Workflow](#lm-studio-prompt-assist-and-mflux-workflow)
 - [Postprocessing](#postprocessing)
 - [Contributing](#contributing)
+
+## Important Things to Know
+
+> **Please read this before continuing with the repository!**
+
+TL;DR: Use **Python 3.11** and install **Git LFS** before cloning
+
+1. This project **works best with Python 3.11**. If you do have a Python Version Manager, simply instally Python 3.11, and use the `python3.11` command in place of all commands that say `python3`, and also ensure to create your `venv` with `python3.11`
+2. This project requires **[Git LFS](https://git-lfs.com/) installed**. Plese install it before cloning the repo to ensure you can clone the LoRA weights.
 
 ## Quickstart
 
@@ -57,11 +68,25 @@ If you're new to Image Generation or locally running models, this is the place f
 
 First, let's get started by simply running the model.
 
+### Prerequisites
+
+Before everything, we need to set up Hugging Face. If you already have a Hugging Face token, logged in to the CLI, and agreed to Flux.1 Dev terms and conditions, skip to [Running Open Genmoji with `mflux`](#running-open-genmoji-with-mflux)
+
+**Setting Up Hugging Face**:
+
+1. Go to [Hugging Face](https://huggingface.co) and make an account. Verify your email.
+2. Go to [Hugging Face Token Settings](https://huggingface.co/settings/tokens) and create a token. Ensure you either have Token Type of **Read** at the top, or check **Read access to contents of all public gated repos you can access** in token type Fine-grained.
+3. Install the [Hugging Face CLI](https://huggingface.co/docs/huggingface_hub/en/guides/cli) with your method of choice (Homebrew, pip, etc.)
+4. Run `huggingface-cli login` and use your token to login
+5. Finally, go to [Flux.1 Dev Hugging Face Page](https://huggingface.co/black-forest-labs/FLUX.1-dev). Read and agree to the terms at the top to use the Gated model.
+
+You're all done! When you run `mflux` below for the first time, it'll automatically download Flux.1 Dev.
+
 ### Running Open Genmoji with `mflux`
 
 The image model we'll be using in this guide is Flux.1 Dev. Open Genmoji takes the form of a LoRA, which is just a file that can teach the image model how to do something specific. In this case, create emojis!
 
-First, **ensure you have [git-lfs](https://git-lfs.com/) installed**. You'll need it to pull the LoRA.
+First, **ensure you have [Git LFS](https://git-lfs.com/) installed**. You'll need it to pull the LoRA.
 
 Then, clone this repository:
 
@@ -91,7 +116,7 @@ mflux-generate \
     --steps 20 \
     --seed 2 \
     --quantize 8 \
-    --guidance 5.0
+    --guidance 5.0 \
     --width 160 \
     --height 160 \
     --lora-paths "./lora/flux-dev.safetensors"
