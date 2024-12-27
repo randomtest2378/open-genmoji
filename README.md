@@ -88,6 +88,8 @@ The image model we'll be using in this guide is Flux.1 Dev. Open Genmoji takes t
 
 First, **ensure you have [Git LFS](https://git-lfs.com/) installed**. You'll need it to pull the LoRA.
 
+> **Note**: You must run `git lfs install` before cloning the repository! If you have already cloned it before installing and the safetensor is a Git LFS reference, run `git lfs pull` to pull the actual safetensor.
+
 Then, clone this repository:
 
 ```bash
