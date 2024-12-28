@@ -4,6 +4,33 @@
 
 Open Genmoji attempts to recreate Apple's Genmoji feature, but with open technology! Open Genmoji works anywhere—Not just Apple devices.
 
+Here's a sneak peek of what Open Genmoi is capable of:
+| ![](./assets/genmoji-samples/open-genmoji/flying-pig.png) | ![](./assets/genmoji-samples/open-genmoji/horse.png) |![](./assets/genmoji-samples/open-genmoji/space-bear.png) | ![](./assets/genmoji-samples/open-genmoji/popsicle.png) | ![](./assets/genmoji-samples/open-genmoji/fireplace.png) | ![](./assets/genmoji-samples/open-genmoji/robber.png) | ![](./assets/genmoji-samples/open-genmoji/hiker.png) |
+| --------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------- | -------------------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------- |---------------------------------------------------- |
+
+<details>
+<summary>Prompts, Apple Genmoji Comparison, and More Information</summary>
+
+All shown emojis were created with Open Genmoji and Prompt Assist. The exact same prompt was given to both Open Genmoji and Apple. Prompt Assist was run with Qwen 2.5 32B Instruct.
+
+Background of emojis removed with Figma AI.
+
+The 7 samples were selected to demonstrate the ability of Open Genmoji across Animal, Object, and Person emojis.
+
+| Prompt                                                                  | Open Genmoji                                              | Apple                                              |
+| ----------------------------------------------------------------------- | --------------------------------------------------------- | -------------------------------------------------- |
+| `flying pig white wings` (Animal Emoji)                                 | ![](./assets/genmoji-samples/open-genmoji/flying-pig.png) | ![](./assets/genmoji-samples/apple/flying-pig.png) |
+| `handsome horse in black suit and tie with flowing mane` (Animal Emoji) | ![](./assets/genmoji-samples/open-genmoji/horse.png)      | ![](./assets/genmoji-samples/apple/horse.png)      |
+| `teddy bear in space suit` (Animal Emoji)                               | ![](./assets/genmoji-samples/open-genmoji/space-bear.png) | ![](./assets/genmoji-samples/apple/space-bear.png)      |
+| `rainbow popsicle` (Object Emoji)                                       | ![](./assets/genmoji-samples/open-genmoji/popsicle.png)   | ![](./assets/genmoji-samples/apple/popsicle.png)   |
+| `fireplace` (Object Emoji)                                              | ![](./assets/genmoji-samples/open-genmoji/fireplace.png)  | ![](./assets/genmoji-samples/apple/fireplace.png)  |
+| `robber with money bag` (Person Emoji)                                  | ![](./assets/genmoji-samples/open-genmoji/robber.png)     | ![](./assets/genmoji-samples/apple/robber.png)     |
+| `hiker` (Person Emoji)                                                  | ![](./assets/genmoji-samples/open-genmoji/hiker.png)      | ![](./assets/genmoji-samples/apple/hiker.png)      |
+
+</details>
+
+<br>
+
 At its core, Open Genmoji is simply a LoRA file, finetuned based on thousands of Apple emojis, that teaches an image generation model to create emojis. Anywhere you can add a LoRA onto an image generation model, you can use Open Genmoji.
 
 Open Genmoji also comes with a built special metaprompt, known as [Open Genmoji Prompt Assist](#prompt-assist) to help you create the perfect prompt to make any emoji you want.
@@ -12,11 +39,13 @@ The best part? You can also [use your creation in iOS 18+ as a real emoji](#post
 
 If you're experienced with Image Models, go to [Quickstart](#quickstart). Otherwise, check out the [Tutorial](#tutorial) for a full explanation.
 
-Be sure to read the [Important Things to Know](#important-things-to-know)!
+Be sure to read the [Important Things to Know](#important-things-to-know) and [Tips for Prompting](#tips-for-prompting)!
 
 ## Table of Contents
 
 - [Quickstart](#quickstart)
+- [Important Things to Know](#important-things-to-know)
+- [Tips for Prompting](#tips-for-prompting)
 - [Prompt Assist](#prompt-assist)
 - [Tutorial](#tutorial)
   - [Running Open Genmoji with `mflux`](#running-open-genmoji-with-mflux)
@@ -41,8 +70,14 @@ TL;DR: Use **Python 3.11** and install **Git LFS** before cloning
 If you know what you're doing, here's a quickstart guide:
 
 - Get the LoRA for Flux.1 Dev in `lora/flux-dev.safetensors`
-- A metaprompt for Open Genmoji is available in `METAPROMPT.md`, so you can create the perfect prompt. [Learn more here.](#prompt-assist)
+- A metaprompt for Open Genmoji is available in `METAPROMPT.md`, so you can create the perfect prompt. [Learn more here.](#prompt-assist) I highly recommend using it!
 - Run Flux.1 Dev with the LoRA. Check out [Postprocessing](#postprocessing) to learn how to use your creation as a real emoji in iOS 18
+
+## Tips for Prompting
+
+The trigger word for the LoRA (what the image model needs to "hear" to start generating emojis) is "emoji". If you do not include this in your prompt, there is a high chance it won't generate an actual emoji.
+
+Furthermore, in order to develop a good prompt, I **highly recommend using Prompt Assist**.
 
 ## Prompt Assist
 
