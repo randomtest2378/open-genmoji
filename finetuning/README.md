@@ -118,6 +118,6 @@ You can monitor the validation image (a smiley face) and the checkpoints in `out
 
 Optionally, help Open Genmoji expand!
 
-When your training is done, go ahead and take your `pytorch_lora_weights.safetensors` **directly under output/models** (not in a checkpoint), give it a nice name, and upload it into the `lora` folder in the Open Genmoji repo. Then, add some metadata in the README. More instructions are there. With all that done, send in a PR!
+When your training is done, go ahead and take your `pytorch_lora_weights.safetensors` **directly under output/models** (not in a checkpoint), give it a nice name, and upload it into the `lora` folder in the Open Genmoji repo with Git LFS. Then, add some metadata in the README. More instructions are there. With all that done, send in a PR! (I will sync it to HuggingFace)
 
 Thank you for your contribution!

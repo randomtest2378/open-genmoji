@@ -21,7 +21,7 @@ The 7 samples were selected to demonstrate the ability of Open Genmoji across An
 | ----------------------------------------------------------------------- | --------------------------------------------------------- | -------------------------------------------------- |
 | `flying pig white wings` (Animal Emoji)                                 | ![](./assets/genmoji-samples/open-genmoji/flying-pig.png) | ![](./assets/genmoji-samples/apple/flying-pig.png) |
 | `handsome horse in black suit and tie with flowing mane` (Animal Emoji) | ![](./assets/genmoji-samples/open-genmoji/horse.png)      | ![](./assets/genmoji-samples/apple/horse.png)      |
-| `teddy bear in space suit` (Animal Emoji)                               | ![](./assets/genmoji-samples/open-genmoji/space-bear.png) | ![](./assets/genmoji-samples/apple/space-bear.png)      |
+| `teddy bear in space suit` (Animal Emoji)                               | ![](./assets/genmoji-samples/open-genmoji/space-bear.png) | ![](./assets/genmoji-samples/apple/space-bear.png) |
 | `rainbow popsicle` (Object Emoji)                                       | ![](./assets/genmoji-samples/open-genmoji/popsicle.png)   | ![](./assets/genmoji-samples/apple/popsicle.png)   |
 | `fireplace` (Object Emoji)                                              | ![](./assets/genmoji-samples/open-genmoji/fireplace.png)  | ![](./assets/genmoji-samples/apple/fireplace.png)  |
 | `robber with money bag` (Person Emoji)                                  | ![](./assets/genmoji-samples/open-genmoji/robber.png)     | ![](./assets/genmoji-samples/apple/robber.png)     |
@@ -31,7 +31,7 @@ The 7 samples were selected to demonstrate the ability of Open Genmoji across An
 
 <br>
 
-At its core, Open Genmoji is simply a LoRA file, finetuned based on thousands of Apple emojis, that teaches an image generation model to create emojis. Anywhere you can add a LoRA onto an image generation model, you can use Open Genmoji.
+At its core, Open Genmoji is simply a LoRA file (available on [HuggingFace](https://huggingface.co/EvanZhouDev/open-genmoji)), finetuned based on thousands of Apple emojis, that teaches an image generation model to create emojis. Anywhere you can add a LoRA onto an image generation model, you can use Open Genmoji.
 
 Open Genmoji also comes with a built special metaprompt, known as [Open Genmoji Prompt Assist](#prompt-assist) to help you create the perfect prompt to make any emoji you want.
 
@@ -43,8 +43,9 @@ Be sure to read the [Important Things to Know](#important-things-to-know) and [T
 
 ## Table of Contents
 
-- [Quickstart](#quickstart)
 - [Important Things to Know](#important-things-to-know)
+- [Downloading the Model](#downloading-the-model)
+- [Quickstart](#quickstart)
 - [Tips for Prompting](#tips-for-prompting)
 - [Prompt Assist](#prompt-assist)
 - [Tutorial](#tutorial)
@@ -58,10 +59,39 @@ Be sure to read the [Important Things to Know](#important-things-to-know) and [T
 
 > **Please read this before continuing with the repository!**
 
-TL;DR: Use **Python 3.11** and install **Git LFS** before cloning
+TL;DR: Use **Python 3.11** and **use HuggingFace** to download weights
 
-1. This project **works best with Python 3.11**. If you do have a Python Version Manager, simply instally Python 3.11, and use the `python3.11` command in place of all commands that say `python3`, and also ensure to create your `venv` with `python3.11`
-2. This project requires **[Git LFS](https://git-lfs.com/) installed**. Plese install it before cloning the repo to ensure you can clone the LoRA weights.
+1. This project **works best with Python 3.11**. If you have a Python Version Manager, simply instally Python 3.11, and use the `python3.11` command in place of all commands that say `python3`, and also ensure to create your `venv` with `python3.11`
+2. The weights for this project are **hosted on HuggingFace** at [EvanZhouDev/open-genmoji](https://huggingface.co/EvanZhouDev/open-genmoji). Check [Downloading the Finetune](#downloading-the-finetune) below for more info.
+
+## Downloading the Finetune
+
+This model available on HuggingFace at [EvanZhouDev/open-genmoji](https://huggingface.co/EvanZhouDev/open-genmoji). However, there's a script included in this repository that makes downloading simple.
+
+First, clone into this repo:
+
+```bash
+git clone https://github.com/EvanZhouDev/open-genmoji.git
+```
+
+Next, we need to install the `huggingface_hub` library. It is recommended you first create a `venv`.
+
+```bash
+# Create a venv, optional
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Install huggingface_hub
+pip install -U huggingface_hub
+```
+
+Now, all you have to do is run the `download.py` script available in the root directory:
+
+```bash
+python3 download.py
+```
+
+Check that `lora/flux-dev.safetensors` is installed. It should be a 209MB file. You're all good to go!
 
 ## Quickstart
 
@@ -69,7 +99,7 @@ TL;DR: Use **Python 3.11** and install **Git LFS** before cloning
 
 If you know what you're doing, here's a quickstart guide:
 
-- Get the LoRA for Flux.1 Dev in `lora/flux-dev.safetensors`
+- Get the LoRA for Flux.1 Dev from HuggingFace at [EvanZhouDev/open-genmoji](https://huggingface.co/EvanZhouDev/open-genmoji). Check out [Downloading the Finetune](#downloading-the-finetune) above for more info.
 - A metaprompt for Open Genmoji is available in `METAPROMPT.md`, so you can create the perfect prompt. [Learn more here.](#prompt-assist) I highly recommend using it!
 - Run Flux.1 Dev with the LoRA. Check out [Postprocessing](#postprocessing) to learn how to use your creation as a real emoji in iOS 18
 
@@ -121,28 +151,35 @@ You're all done! When you run `mflux` below for the first time, it'll automatica
 
 The image model we'll be using in this guide is Flux.1 Dev. Open Genmoji takes the form of a LoRA, which is just a file that can teach the image model how to do something specific. In this case, create emojis!
 
-First, **ensure you have [Git LFS](https://git-lfs.com/) installed**. You'll need it to pull the LoRA.
-
-> **Note**: You must run `git lfs install` before cloning the repository! If you have already cloned it before installing and the safetensor is a Git LFS reference, run `git lfs pull` to pull the actual safetensor.
-
-Then, clone this repository:
+First, clone this repository:
 
 ```bash
 git clone https://github.com/EvanZhouDev/open-genmoji.git
 ```
 
-The LoRA we'll be using is `lora/flux-dev.safetensors`.
-
-Next, we'll need to install `mflux` on `pip`. This is a port of Flux, specifically for Mac. It's recommended we first create a `venv` and then install `mflux`:
+Next, we need to install some dependencies. It's recommended we create a `venv`:
 
 ```bash
 # Create a venv, optional
 python3 -m venv .venv
 source .venv/bin/activate
 
-# Install mflux
-pip install -U mflux
+# Install huggingface_hub and mflux
+pip install -U huggingface_hub mflux
 ```
+
+Here's what those dependencies are:
+
+- `huggingface_hub`: This will help us download the weights that we need to run Open Genmoji
+- `mflux`: This is a port of Flux (to run our image generation model), specifically for Mac.
+
+Now, let's actually install the weights. They're on HuggingFace at [EvanZhouDev/open-genmoji](https://huggingface.co/EvanZhouDev/open-genmoji), but there's a quick installation script you can run in this directory:
+
+```bash
+python3 ./download.py
+```
+
+After it's done installing, verify that `lora/flux-dev.safetensors` is downloaded. That'll be the LoRA that you'll be using.
 
 Now, you're all good to go. Run the following command and you'll be able to create your first emoji. Play around with the prompt, and see what you can make. (If you're struggling with a good result, check out [Prompt Assist](#running-open-genmoji-with-prompt-assist))
 
@@ -182,6 +219,8 @@ Then, take the LLM output and feed that to `mflux`. Observe how the output is mu
 Now that you have a image output, head on to [Postprocessing](#postprocessing) to start using your creation as an actual emoji on your iPhone, or learn a bit more below about how to chain Prompt Assist and `mflux` together.
 
 ### LM Studio Prompt Assist and `mflux` Workflow
+
+> If you haven't already, go to [Downloading the Finetune](#downloading-the-finetune) to download the LoRA
 
 It's a bit tedious to feed your own prompt to an LLM, then feed the LLM output to `mflux`. So I made a quick Python workflow to chain these things together.
 
