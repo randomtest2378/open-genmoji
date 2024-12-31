@@ -1,10 +1,18 @@
-![](./assets/openGenmoji.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/banner@dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/banner@light.png">
+  <img alt="Open Genmoji Banner" src="./assets/banner@light.png">
+</picture>
+
+<p align="center">
+  <a href="https://huggingface.co/EvanZhouDev/open-genmoji">HuggingFace</a> | <a href="#quickstart">Quickstart</a> | <a href="#tutorial">Tutorial</a>
+</p>
 
 ## What is Open Genmoji?
 
 Open Genmoji attempts to recreate Apple's Genmoji feature, but with open technology! Open Genmoji works anywhere—Not just Apple devices.
 
-Here's a sneak peek of what Open Genmoi is capable of:
+Here's a sneak peek of what Open Genmoji is capable of:
 | ![](./assets/genmoji-samples/open-genmoji/flying-pig.png) | ![](./assets/genmoji-samples/open-genmoji/horse.png) |![](./assets/genmoji-samples/open-genmoji/space-bear.png) | ![](./assets/genmoji-samples/open-genmoji/popsicle.png) | ![](./assets/genmoji-samples/open-genmoji/fireplace.png) | ![](./assets/genmoji-samples/open-genmoji/robber.png) | ![](./assets/genmoji-samples/open-genmoji/hiker.png) |
 | --------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------- | -------------------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------- |---------------------------------------------------- |
 
@@ -99,6 +107,7 @@ Check that `lora/flux-dev.safetensors` is installed. It should be a 209MB file. 
 
 If you know what you're doing, here's a quickstart guide:
 
+- Use **Python 3.11** to ensure everything works
 - Get the LoRA for Flux.1 Dev from HuggingFace at [EvanZhouDev/open-genmoji](https://huggingface.co/EvanZhouDev/open-genmoji). Check out [Downloading the Finetune](#downloading-the-finetune) above for more info.
 - A metaprompt for Open Genmoji is available in `METAPROMPT.md`, so you can create the perfect prompt. [Learn more here.](#prompt-assist) I highly recommend using it!
 - Run Flux.1 Dev with the LoRA. Check out [Postprocessing](#postprocessing) to learn how to use your creation as a real emoji in iOS 18
@@ -130,6 +139,8 @@ Check out [LM Studio Prompt Assist and `mflux` Workflow](#lm-studio-prompt-assis
 > This tutorial is specifically for Mac. However, Open Genmoji is completely adaptable for other operating systems. You will just need another tool to run Flux.1 Dev, with a LoRA.
 
 If you're new to Image Generation or locally running models, this is the place for you. This guide will lead you through all the steps necessary to run Open Genmoji, and also use the Open Genmoji Prompt Assist metaprompt.
+
+Before you start, ensure you are using Python 3.11. The easiest way to do this is by installing Python 3.11 with your method of choice, then replacing the CLI command `python3`/`python` with `python3.11`. Ensure you also create your `venv` with Python 3.11.
 
 First, let's get started by simply running the model.
 
