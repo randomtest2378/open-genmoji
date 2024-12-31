@@ -5,10 +5,12 @@
 </picture>
 
 <p align="center">
-  <a href="https://huggingface.co/EvanZhouDev/open-genmoji">HuggingFace</a> | <a href="#quickstart">Quickstart</a> | <a href="#tutorial">Tutorial</a>
+  <a href="https://huggingface.co/EvanZhouDev/open-genmoji">HuggingFace</a> | <a href="#quickstart">Quickstart</a> | <a href="#tutorial">Tutorial</a> | <a href="https://www.youtube.com/watch?v=vOVDyRIS09k">Making Open Genmoji (Video)</a>
 </p>
 
 ## What is Open Genmoji?
+
+> See how Open Genmoji was created—and learn about how Apple Genmoji works under-the-hood, on [YouTube](https://www.youtube.com/watch?v=vOVDyRIS09k).
 
 Open Genmoji attempts to recreate Apple's Genmoji feature, but with open technology! Open Genmoji works anywhere—Not just Apple devices.
 
