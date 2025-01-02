@@ -3,7 +3,7 @@ import json
 import os
 
 
-def get_prompt_response(user_prompt: str) -> str:
+def get_prompt_response(user_prompt: str, metaprompt: str) -> str:
     # The URL where the local server is running
     url = "http://localhost:1234/v1/chat/completions"
 
@@ -13,7 +13,7 @@ def get_prompt_response(user_prompt: str) -> str:
     # The JSON data payload
     # Read the content from METAPROMPT.md
     with open(
-        f"{os.path.abspath(os.path.dirname(__file__))}/METAPROMPT.md", "r"
+        f"{os.path.abspath(os.path.dirname(__file__))}/metaprompt/{metaprompt}.md", "r"
     ) as file:
         prompt_content = file.read()
 
