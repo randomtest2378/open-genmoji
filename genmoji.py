@@ -3,6 +3,7 @@ from promptAssistant import get_prompt_response
 from generateImage import generate_image
 from PIL import Image
 import os
+import argparse
 
 
 def get_unique_path(base_path):
@@ -21,16 +22,25 @@ def get_unique_path(base_path):
         counter += 1
 
 
-def main(user_prompt: str, output_path: str = "output/genmoji.png"):
-    # Get the response from the prompt assistant
-    prompt_response = get_prompt_response(user_prompt)
-    print("Prompt Created: " + prompt_response)
+def main(arguments, output_path: str = "output/genmoji.png"):
+    user_prompt = arguments.user_prompt
 
-    # Generate the image using the response from the prompt assistant
-    image = generate_image(prompt_response)
+    # if the user did not turn off prompt assist:
+    if not arguments.direct:
+        # Get the response from the prompt assistant
+        prompt_response = get_prompt_response(user_prompt)
+        print("\nPrompt Created: " + prompt_response)
+
+    # if the user turned off prompt assist
+    elif arguments.direct:
+        prompt_response: str = arguments.user_prompt
+        print("\nUsing original prompt: " + prompt_response)
+
+    # Generate the image using the resulting prompt
+    image = generate_image(prompt_response, arguments)
 
     width, height = image.size
-    newImg = image.resize((width * 5, height * 5), Image.LANCZOS)
+    newImg = image.resize((width * arguments.upscale, height * arguments.upscale), Image.LANCZOS)
 
     output_path = get_unique_path(output_path)
     # Create output directory if it doesn't exist
@@ -39,9 +49,29 @@ def main(user_prompt: str, output_path: str = "output/genmoji.png"):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python genmoji.py <user_prompt>")
-        sys.exit(1)
+    # When function is called it creates an object that looks like this:
+    # Namespace(user_prompt='a squirrel holding an iphone', assist=True, lora='flux-dev', width=160, height=160, upscale=5)
+    # the args object can then be passed into different functions
 
-    user_prompt = sys.argv[1]
-    main(user_prompt)
+    # and its values can be accessed, for example, like this:
+    # `args.height` --> returns `160` (as an int) by default
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("user_prompt", type=str, help="Your prompt")
+    parser.add_argument("-d", "--direct",
+                        action="store_true", help="Do not use prompt assistant")
+    parser.add_argument("-l", "--lora",
+                        nargs="?", default="flux-dev",
+                        type=str, help="The LoRA to use")
+    parser.add_argument("-iw", "--width",
+                        nargs="?", default=160,
+                        type=int, help="Image width")
+    parser.add_argument("-ih", "--height",
+                        nargs="?", default=160,
+                        type=int, help="Image height")
+    parser.add_argument("-u", "--upscale",
+                        nargs="?", default=5,
+                        type=int, help="Upscale factor")
+    args = parser.parse_args()
+    print(args)
+    main(arguments=args)
