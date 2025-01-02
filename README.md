@@ -261,11 +261,32 @@ Now, given that LM Studio is correctly set up, you should be able to directly ru
 python3 genmoji.py "[your prompt]"
 ```
 
+> Note that this will automatically use the `flux-dev` LoRA (and will error should it [not be installed](#downloading-the-finetune)). See [Advanced Usage](#advanced-usage) below to see how to use a different LoRA.
+
 And it'll first generate a prompt with LM Studio, and feed that into `mflux`. The output should be saved by default in `output/genmoji-001.png` (Number will increase automatically).
 
 > **Note**: Before it saves, it'll also do the Postprocessing step of resizing it to 5x the size with anti-aliasing (160x160 → 800x800). Learn more in [Postprocessing](#postprocessing)
 
-Now, let's take a look at [Postprocessing](#postprocessing) to start using your creation as an actual emoji in iOS.
+Now, let's take a look at [Postprocessing](#postprocessing) to start using your creation as an actual emoji in iOS, or see [Advanced Usage](#advanced-usage) to learn how to use a different LoRA with this workflow.
+
+#### Advanced Usage
+
+This workflow also enables automatic metaprompt selection when using a different LoRA.
+
+All you have to do is call it with an extra argument, as such:
+
+```bash
+python3 genmoji.py "[lora name]" "[your prompt]"
+```
+
+For example, let's use [@caspersimon](https://github.com/caspersimon)'s `diverse-emoji` LoRA. First, you'll need to ensure it's [downloaded with the download script](#downloading-the-finetune). Now, run this command:
+
+```bash
+python3 genmoji.py "diverse-emoji" "[your prompt]"
+```
+
+This will automatically fetch the correct metaprompt, use it, and generate an emoji with the `diverse-emoji` LoRA.
+
 
 ## Postprocessing
 
