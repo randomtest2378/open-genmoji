@@ -4,6 +4,7 @@ from generateImage import generate_image
 from PIL import Image
 import os
 import argparse
+import json
 
 
 def get_unique_path(base_path):
@@ -22,25 +23,51 @@ def get_unique_path(base_path):
         counter += 1
 
 
-def main(arguments, output_path: str = "output/genmoji.png"):
-    user_prompt = arguments.user_prompt
+def main(
+    user_prompt: str,
+    output_path: str = "output/genmoji.png",
+    lora: str = "flux-dev",
+    direct: bool,
+    height: int,
+    width: int,
+    upscale_factor:int
+):
+    with open("./lora/info.json", "r") as f:
+        models = json.load(f)
+        metaprompt = "open-genmoji"
+        found = False
+        for model in models:
+            if model["name"] == lora:
+                found = True
+                metaprompt = model["metaprompt"]
+                break
 
-    # if the user did not turn off prompt assist:
-    if not arguments.direct:
-        # Get the response from the prompt assistant
-        prompt_response = get_prompt_response(user_prompt)
-        print("\nPrompt Created: " + prompt_response)
+        if not found:
+            print(
+                f"Error: LoRA {lora} does not exist. Run 'python download.py' to view and download available LoRAs."
+            )
+            sys.exit(1)
 
-    # if the user turned off prompt assist
-    elif arguments.direct:
-        prompt_response: str = arguments.user_prompt
-        print("\nUsing original prompt: " + prompt_response)
+        # Check if the lora file exists
+        lora_path = f"lora/{lora}.safetensors"
+        if not os.path.exists(lora_path):
+            print(
+                f"Error: LoRA {lora} is not downloaded. Please run 'python download.py' to download it."
+            )
+            sys.exit(1)
+        if not direct:
+            # Get the response from the prompt assistant
+            prompt_response = get_prompt_response(user_prompt, metaprompt)
+            print("Prompt Created: " + prompt_response)
+        elif direct:
+            prompt_response = user_prompt
+            print("Original prompt used: " + prompt_response)
 
-    # Generate the image using the resulting prompt
-    image = generate_image(prompt_response, arguments)
+    # Generate the image using the response from the prompt assistant
+    image = generate_image(prompt_response, lora, width, height)
 
     width, height = image.size
-    newImg = image.resize((width * arguments.upscale, height * arguments.upscale), Image.LANCZOS)
+    newImg = image.resize((width * upscale_factor, height * upscale_factor), Image.LANCZOS)
 
     output_path = get_unique_path(output_path)
     # Create output directory if it doesn't exist
@@ -73,5 +100,13 @@ if __name__ == "__main__":
                         nargs="?", default=5,
                         type=int, help="Upscale factor")
     args = parser.parse_args()
-    print(args)
-    main(arguments=args)
+    user_prompt = args.user_prompt
+    lora = args.lora
+    direct = args.direct
+    height = args.height
+    width = args.width
+    upscale_factor = args.upscale
+
+    main(user_prompt=user_prompt, lora=lora,
+         direct=direct, height=height,
+         width=width, upscale_factor=upscale_factor)

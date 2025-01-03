@@ -3,8 +3,7 @@ import json
 import os
 
 
-def get_prompt_response(user_prompt: str) -> str:
-    lora_name = "flux-dev"
+def get_prompt_response(user_prompt: str, metaprompt: str) -> str:
     # The URL where the local server is running
     url = "http://localhost:1234/v1/chat/completions"
 
@@ -14,7 +13,7 @@ def get_prompt_response(user_prompt: str) -> str:
     # The JSON data payload
     # Read the content from METAPROMPT.md
     with open(
-        f"{os.path.abspath(os.path.dirname(__file__))}/METAPROMPTS/{lora_name}/METAPROMPT.md", "r"
+        f"{os.path.abspath(os.path.dirname(__file__))}/metaprompt/{metaprompt}.md", "r"
     ) as file:
         prompt_content = file.read()
 
@@ -23,7 +22,7 @@ def get_prompt_response(user_prompt: str) -> str:
 
     # get the (pre-made) conversation history and append the current full prompt
     with open(
-        f"{os.path.abspath(os.path.dirname(__file__))}/METAPROMPTS/{lora_name}/conversation_history.json", "r"
+        f"{os.path.abspath(os.path.dirname(__file__))}/metaprompts/{lora_name}_conversation_history.json", "r"
     ) as json_file:
         conversation_history = json.load(json_file)
         conversation_history["messages"].append({"role": "user", "content": full_prompt})
