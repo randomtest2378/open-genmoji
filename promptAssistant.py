@@ -21,11 +21,17 @@ def get_prompt_response(user_prompt: str, metaprompt: str) -> str:
     full_prompt = prompt_content + f'\n\nUSER PROMPT: "{user_prompt}"'
 
     # get the (pre-made) conversation history and append the current full prompt
-    with open(
-        f"{os.path.abspath(os.path.dirname(__file__))}/metaprompts/{lora_name}_conversation_history.json", "r"
-    ) as json_file:
-        conversation_history = json.load(json_file)
-        conversation_history["messages"].append({"role": "user", "content": full_prompt})
+    json_path = f"{os.path.abspath(os.path.dirname(__file__))}/metaprompt/{metaprompt}.json"
+
+    try:
+        with open(json_path, "r") as json_file:
+            conversation_history = json.load(json_file)
+            print("Using pre-existing conversation history")
+    except FileNotFoundError:
+        print("No pre existing conversation history")
+        conversation_history = {"messages": []}
+
+    conversation_history["messages"].append({"role": "user", "content": full_prompt})
 
     data = {
         "messages": conversation_history["messages"],

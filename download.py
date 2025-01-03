@@ -9,7 +9,7 @@ with open("./lora/info.json", "r") as f:
 print("Available models:")
 for i, model in enumerate(models):
     print(
-        f"[{i}] {model['name']} ({model['model'].split("/")[1]})\n> {model['description']}"
+        f"[{i}] {model['name']} ({model['model'].split('/')[1]})\n> {model['description']}"
     )
 
 # Get user choice
