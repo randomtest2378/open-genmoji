@@ -271,22 +271,52 @@ Now, let's take a look at [Postprocessing](#postprocessing) to start using your 
 
 #### Advanced Usage
 
+##### Using different LoRA's
+
 This workflow also enables automatic metaprompt selection when using a different LoRA.
 
-All you have to do is call it with an extra argument, as such:
+All you have to do is call it with an extra argument with flag `--lora` or `-l`, as such:
 
 ```bash
-python3 genmoji.py "[lora name]" "[your prompt]"
+python3 genmoji.py "[your prompt]" --lora [lora name] 
 ```
 
 For example, let's use [@caspersimon](https://github.com/caspersimon)'s `diverse-emoji` LoRA. First, you'll need to ensure it's [downloaded with the download script](#downloading-the-finetune). Now, run this command:
 
 ```bash
-python3 genmoji.py "diverse-emoji" "[your prompt]"
+python3 genmoji.py "[your prompt]" -l diverse-emoji
 ```
 
 This will automatically fetch the correct metaprompt, use it, and generate an emoji with the `diverse-emoji` LoRA.
 
+##### Bypassing Prompt Assistant
+
+To directly generate without first using Prompt Assistant, add the `--direct` or `-d` flag to your command
+
+
+```bash
+python3 genmoji.py "emoji of a squirrel" -d
+```
+
+##### Generating at custom resolution
+
+The default resolution is 160x160. To change it, use the `--height` or `-ih` flags to change image height, and `--width` or `-iw` to change image width.
+
+For example, to generate an emoji of a dog wearing sunglasses at 320x320 pixels, run:
+
+```bash
+python3 genmoji.py "dog wearing sunglasses" -ih 320 -iw 320
+```
+
+##### Changing upscale factor
+
+By default, images are scaled up to 5 times their original resolution. To change it, use the `--upscale` or `-u` flags.
+
+For example, to upscale to 2x the original resolution, use:
+
+```bash
+python3 genmoji.py "emoji of a squirrel" -u 2
+```
 
 ## Postprocessing
 
