@@ -26,10 +26,10 @@ Contributing is easy! Here's the simple steps:
 
 1. First, create a LoRA. You can learn how in `README` in the `open-genmoji/finetuning` folder in the root directory.
 2. Go ahead and name that LoRA, and submit a PR to the [Open Genmoji HuggingFace](https://huggingface.co/EvanZhouDev/open-genmoji), adding that file.
-3. If you would like your model to use a custom metaprompt (for Prompt Assist), you should add that to the `metaprompt` folder. _You do not need a metaprompt. You can choose to use `metaprompt/open-genmoji`_
+3. If you would like your model to use a custom metaprompt for Prompt Assist, you should add it to the `metaprompt` folder. A metaprompt consists of a **`md` file for an LLM** to improve the prompt to the image model. You can also choose to include a **LLM conversation history `json`**. Both of these files should have the same file name (For example `open-gemoji.md` and `open-genmoji.json`). If you have a custom metaprompt `md` but no custom `json`, no Conversation History will be loaded.  _Note that there is already a `metaprompt/open-genmoji` JSON and Markdown. You may use that as your default._
    
    <details>
-     <summary><em>Optional: improving Prompt Assistant consistency by adding conversation history </em> </summary>
+     <summary>Optional: Improving Prompt Assistant consistency by adding a conversation history JSON </summary>
      To make outputs of your metaprompt more consistent across different LLM's, you can choose to add example combinations of input and output texts to a JSON file with the same name as your metaprompt.
      
      The file should be structured with a key `"messages"` which has a value containing a list of dictionaries as shown below. 
@@ -67,7 +67,7 @@ Contributing is easy! Here's the simple steps:
 	"model": "black-forest-labs/FLUX.1-dev", // HuggingFace path of base model
 	"huggingface": "EvanZhouDev/open-genmoji", // Your own HuggingFace repo, optional
 	"name": "flux-dev", // The name of your LoRA file
-	"metaprompt": "open-genmoji", // The name of your metaprompt file
+	"metaprompt": "open-genmoji", // The name of your metaprompt file (do not include .md or .json)
 	"description": "Original Open Genmoji finetune. Trained on Apple Emojis w/o Skin Tone Variants." // Nice and short description of your model (< 100 characters)
 }
 ```
