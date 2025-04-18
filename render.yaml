@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: open-genmoji
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: python3 genmoji_api.py
+    envVars:
+      - key: PORT
+        value: 10000
